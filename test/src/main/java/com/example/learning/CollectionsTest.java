@@ -20,7 +20,13 @@ public class CollectionsTest {
 		
 		Collections.sort(names, (s1, s2) -> s1.compareTo(s2));
 		
-		System.out.println("After: " + names);
+		System.out.println("After: ");
+		
+		names.forEach(CollectionsTest::print);
+	}
+	
+	public static void print(String x) {
+		System.out.print(x + ", ");
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.example.learning;
+package com.example.learning.java8;
 
 public class MathOperationTest {
 

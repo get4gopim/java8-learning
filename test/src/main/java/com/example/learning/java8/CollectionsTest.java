@@ -1,4 +1,4 @@
-package com.example.learning;
+package com.example.learning.java8;
 
 import java.util.ArrayList;
 import java.util.Collections;

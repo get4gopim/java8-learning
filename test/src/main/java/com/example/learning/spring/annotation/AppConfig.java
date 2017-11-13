@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Lazy;
 
 @Configuration
 @ComponentScan(basePackages = {"com.example.learning.spring.annotation"})
-@ImportResource("classpath:/connection.properties")
+//@ImportResource({"classpath:connection.properties"})
 public class AppConfig {
 	
 	@Value("${jdbc.url}")

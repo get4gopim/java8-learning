@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 public class DemoApp {
@@ -26,14 +27,14 @@ public class DemoApp {
 	}
 
 	public static void main(String[] args) {
-		/*addEvent();*/
+		addEvent();
 		displayEvents();
 	}
 
 	private static void addEvent() {
+		Session session = getSessionFactory().openSession();
 		try {
-			Session session = getSessionFactory().openSession();
-			session.beginTransaction();
+			//Transaction tx = session.beginTransaction();
 			
 			Event event = new Event();
 			event.setDate(new Date());
@@ -41,9 +42,11 @@ public class DemoApp {
 			
 			session.save(event);
 			
-			session.getTransaction().commit();
+			//tx.commit();
 		} catch (Throwable ex) {
 			ex.printStackTrace();
+		} finally {
+			//session.close();
 		}
 	}
 	

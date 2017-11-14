@@ -22,9 +22,9 @@ public class Student {
 	@Column(name = "student_name")
 	private String name;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	/*@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "department_id")
-	private Department dept;
+	private Department dept;*/
 
 	public Student() {
 
@@ -50,17 +50,17 @@ public class Student {
 		this.name = name;
 	}
 
-	public Department getDept() {
+	/*public Department getDept() {
 		return dept;
 	}
 
 	public void setDept(Department dept) {
 		this.dept = dept;
-	}
+	}*/
 
 	@Override
 	public String toString() {
-		return "Student [id=" + id + ", name=" + name + ", dept=" + dept + "]";
+		return "Student [id=" + id + ", name=" + name + "]";
 	}
 
 }

@@ -23,9 +23,13 @@ public class Student {
 	@Column(name = "student_name")
 	private String name;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "department_id", nullable = false)
 	private Department department;
+	
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "university_id", nullable = false)
+	private University university;
 
 	public Student() {
 
@@ -59,9 +63,17 @@ public class Student {
 		this.department = department;
 	}
 
+	public University getUniversity() {
+		return university;
+	}
+
+	public void setUniversity(University university) {
+		this.university = university;
+	}
+
 	@Override
 	public String toString() {
-		return "Student [id=" + id + ", name=" + name + " department = " + department.getName() + "]";
+		return "Student [id=" + id + ", name=" + name + ", Department=" + department.getName() + ", University=" + university.getName() + "]";
 	}
 
 }

@@ -27,7 +27,10 @@
         
         <property name="show_sql">true</property>
         
-        <!-- <mapping class="com.example.learning.hib.annotation.Student" />
-        <mapping class="com.example.learning.hib.annotation.Department" /> -->
+        <!-- 
+        <mapping class="com.example.learning.hib.annotation.Student" />
+        <mapping class="com.example.learning.hib.annotation.Department" />
+        <mapping class="com.example.learning.hib.annotation.University" />
+         -->
     </session-factory>
 </hibernate-configuration>

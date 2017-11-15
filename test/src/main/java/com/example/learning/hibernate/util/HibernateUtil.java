@@ -1,6 +1,7 @@
 package com.example.learning.hibernate.util;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -11,6 +12,7 @@ import org.hibernate.service.ServiceRegistry;
 
 import com.example.learning.hib.annotation.Department;
 import com.example.learning.hib.annotation.Student;
+import com.example.learning.hib.annotation.University;
 
 public class HibernateUtil {
 	
@@ -29,8 +31,10 @@ public class HibernateUtil {
 		try {
 			Configuration configuration = new Configuration();
 			configuration.configure(this.filePath);
+			
 			configuration.addAnnotatedClass(Department.class);
 			configuration.addAnnotatedClass(Student.class);
+			configuration.addAnnotatedClass(University.class);
 			
 			//sessionFactory = configuration.configure(this.filePath).buildSessionFactory();
 			
@@ -97,5 +101,19 @@ public class HibernateUtil {
 			session.close();
 		}
 		return collection;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Student> getStudentByUniversityName(final String universityName) {
+		Session session = getSessionFactory().openSession();
+		List<Student> students = null;
+		try {
+			students = session.createQuery("from Student where university.name =:university" ).setParameter("university", universityName).list();
+		} catch (Throwable ex) {
+			ex.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return students;
 	}
 }

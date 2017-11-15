@@ -1,5 +1,6 @@
 package com.example.learning.hib.annotation;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -22,9 +23,9 @@ public class Student {
 	@Column(name = "student_name")
 	private String name;
 	
-	/*@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "department_id")
-	private Department dept;*/
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "department_id", nullable = false)
+	private Department department;
 
 	public Student() {
 
@@ -50,17 +51,17 @@ public class Student {
 		this.name = name;
 	}
 
-	/*public Department getDept() {
-		return dept;
+	public Department getDepartment() {
+		return department;
 	}
 
-	public void setDept(Department dept) {
-		this.dept = dept;
-	}*/
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
 
 	@Override
 	public String toString() {
-		return "Student [id=" + id + ", name=" + name + "]";
+		return "Student [id=" + id + ", name=" + name + " department = " + department.getName() + "]";
 	}
 
 }

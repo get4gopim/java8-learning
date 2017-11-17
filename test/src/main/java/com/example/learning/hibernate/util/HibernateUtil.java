@@ -3,6 +3,7 @@ package com.example.learning.hibernate.util;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -15,6 +16,8 @@ import com.example.learning.hib.annotation.Student;
 import com.example.learning.hib.annotation.University;
 
 public class HibernateUtil {
+	
+	private static final Logger LOGGER = Logger.getLogger(HibernateUtil.class);
 	
 	private final String filePath;
 	
@@ -36,16 +39,14 @@ public class HibernateUtil {
 			configuration.addAnnotatedClass(Student.class);
 			configuration.addAnnotatedClass(University.class);
 			
-			//sessionFactory = configuration.configure(this.filePath).buildSessionFactory();
-			
 			serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
 		            configuration.getProperties()).build();
 			
 			sessionFactory = configuration.buildSessionFactory(serviceRegistry);
 			
 			return sessionFactory;
-		} catch (Throwable ex) {
-			ex.printStackTrace();
+		} catch (Exception ex) {
+			LOGGER.error(ex);
 			throw ex;
 		}
 	}
@@ -54,7 +55,7 @@ public class HibernateUtil {
 		return sessionFactory;
 	}
 	
-	public void close() throws Exception{
+	public void close() {
 	    if(serviceRegistry!= null) {
 	        StandardServiceRegistryBuilder.destroy(serviceRegistry);
 	    }
@@ -67,8 +68,8 @@ public class HibernateUtil {
 			Transaction tx = session.beginTransaction();
 			obj = session.save(object);
 			tx.commit();
-		} catch (Throwable ex) {
-			ex.printStackTrace();
+		} catch (Exception ex) {
+			LOGGER.error(ex);
 		} finally {
 			session.close();
 		}
@@ -81,8 +82,8 @@ public class HibernateUtil {
 			Transaction tx = session.beginTransaction();
 			session.saveOrUpdate(object);
 			tx.commit();
-		} catch (Throwable ex) {
-			ex.printStackTrace();
+		} catch (Exception ex) {
+			LOGGER.error(ex);
 		} finally {
 			session.close();
 		}
@@ -92,11 +93,11 @@ public class HibernateUtil {
 	public <T> Collection<T> list(final Class<T> object) {
 		Session session = getSessionFactory().openSession();
 		Collection<T> collection = null;
-		System.out.println("Class:" + object.getName());
+		LOGGER.debug("Class:" + object.getName());
 		try {
 			collection = session.createQuery("from " + object.getName()).list();
-		} catch (Throwable ex) {
-			ex.printStackTrace();
+		} catch (Exception ex) {
+			LOGGER.error(ex);
 		} finally {
 			session.close();
 		}
@@ -109,8 +110,8 @@ public class HibernateUtil {
 		List<Student> students = null;
 		try {
 			students = session.createQuery("from Student where university.name =:university" ).setParameter("university", universityName).list();
-		} catch (Throwable ex) {
-			ex.printStackTrace();
+		} catch (Exception ex) {
+			LOGGER.error(ex);
 		} finally {
 			session.close();
 		}

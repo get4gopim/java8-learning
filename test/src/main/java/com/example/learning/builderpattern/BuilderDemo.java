@@ -1,10 +1,14 @@
 package com.example.learning.builderpattern;
 
-public class BuilderTest {
+import org.apache.log4j.Logger;
 
+public class BuilderDemo {
+
+	private static final Logger LOGGER = Logger.getLogger(BuilderDemo.class);
+	
 	public static void main(String[] args) {
 		Computer comp = new Computer.ComputerBuilder(128, 2).setBluetoothEnabled(true).build();
-		System.out.println(comp);
+		LOGGER.debug(comp);
 	}
 
 }

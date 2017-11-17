@@ -1,11 +1,10 @@
 package com.example.learning.commandpattern;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.EnumMap;
 
-public class CommandPatternTest {
+public class CommandPatternDemo {
 	
-	private static Map<CarType, Car> carHandler = new HashMap<>();
+	private static EnumMap<CarType, Car> carHandler = new EnumMap<> (CarType.class);
 	
 	static {
 		carHandler.put(CarType.BALENO, new Baleno());
@@ -14,7 +13,7 @@ public class CommandPatternTest {
 	}
 
 	public static void main(String[] args) {
-		CommandPatternTest test = new CommandPatternTest();
+		CommandPatternDemo test = new CommandPatternDemo();
 		
 		test.getCar("EcoSport").drive();
 		test.getCar(CarType.CRETA).drive();

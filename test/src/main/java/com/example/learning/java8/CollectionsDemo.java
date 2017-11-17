@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class CollectionsTest {
+import org.apache.log4j.Logger;
 
+public class CollectionsDemo {
+
+	private static final Logger LOGGER = Logger.getLogger(CollectionsDemo.class);
+	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		List<String> names = new ArrayList<>();
 		names.add("Sansa Stark");
 		names.add("Brann Stark");
@@ -16,17 +19,17 @@ public class CollectionsTest {
 		names.add("Nerd Stark");
 		names.add("Catalyn Stark");
 		
-		System.out.println("Before: " + names);
+		LOGGER.debug("Before: " + names);
 		
 		Collections.sort(names, (s1, s2) -> s1.compareTo(s2));
 		
-		System.out.println("After: ");
+		LOGGER.debug("After: ");
 		
-		names.forEach(CollectionsTest::print);
+		names.forEach(CollectionsDemo::print);
 	}
 	
 	public static void print(String x) {
-		System.out.print(x + ", ");
+		LOGGER.debug(x + ", ");
 	}
 
 }

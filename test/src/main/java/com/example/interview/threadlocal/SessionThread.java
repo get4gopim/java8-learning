@@ -1,36 +1,37 @@
 package com.example.interview.threadlocal;
 
+import org.apache.log4j.Logger;
+
 public class SessionThread implements Runnable {
 	
-	private ThreadLocal<String> CONTEXT_ID = new ThreadLocal<>();
+	private static final Logger LOGGER = Logger.getLogger(SessionThread.class);
 	
-	private InheritableThreadLocal<String> INHERIT_CONTEXT_ID = new InheritableThreadLocal<>();
+	private ThreadLocal<String> contextId = new ThreadLocal<>();
 	
-	private String _localAssignment;
+	private InheritableThreadLocal<String> inheritContextId = new InheritableThreadLocal<>();
+	
+	private String localAssignment;
 	
 	SessionThread(String value) {
-		//CONTEXT_ID.set(value);
-		this._localAssignment = value;
+		this.localAssignment = value;
 	}
 	
 	public String getContextId() {
-		return CONTEXT_ID.get();
+		return contextId.get();
 	}
 
 	public void setContextId(String value) {
-		CONTEXT_ID.set(value);
+		contextId.set(value);
 	}
 	
 	@Override
 	public void run() {
 		for (int i = 0; i<2; i++) {
-			setContextId (this._localAssignment);
+			setContextId (this.localAssignment);
 			
-			INHERIT_CONTEXT_ID.set(this._localAssignment);
+			inheritContextId.set(this.localAssignment);
 			
-			//System.out.println("Thread: " + Thread.currentThread().getName() + "; Context Id: " + getContextId() + "; " + SessionContext.get());
-			
-			System.out.println("Thread: " + Thread.currentThread().getName() + "; Context Id: " + INHERIT_CONTEXT_ID.get());
+			LOGGER.debug("Thread: " + Thread.currentThread().getName() + "; Context Id: " + inheritContextId.get());
 		}
 	}
 

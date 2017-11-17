@@ -2,8 +2,12 @@ package com.example.interview.countdownlatch;
 
 import java.util.concurrent.CountDownLatch;
 
+import org.apache.log4j.Logger;
+
 public class CountDownLatchDemo {
-	public static void main(String args[]) {
+	private static final Logger LOGGER = Logger.getLogger(CountDownLatchDemo.class);
+	
+	public static void main(String[] args) {
 		
 		final CountDownLatch latch = new CountDownLatch(3);
 		Thread cacheService = new Thread(new Service("CacheService", 1000, latch));
@@ -23,9 +27,10 @@ public class CountDownLatchDemo {
 
 		try {
 			latch.await(); // main thread is waiting on CountDownLatch to finish
-			System.out.println("All services are up, Application is starting now");
+			LOGGER.debug("All services are up, Application is starting now");
 		} catch (InterruptedException ie) {
-			ie.printStackTrace();
+			LOGGER.error(ie);
+			Thread.currentThread().interrupt();
 		}
 
 	}

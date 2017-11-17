@@ -1,30 +1,29 @@
 package com.example.learning.spring.annotation;
 
+import org.apache.log4j.Logger;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class TestConfig {
 
+	private static final Logger LOGGER = Logger.getLogger(TestConfig.class);
+	
 	public static void main(String[] args) {
-		AnnotationConfigApplicationContext ctx = null;
-		try {
-			ctx = new AnnotationConfigApplicationContext(AppConfig.class);
+		try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class)) {
 			IMovieFinder movieFinder = ctx.getBean("movieFinder", IMovieFinder.class);
 
-			System.out.println("movie = " + movieFinder.fineMovie("Games of Thrones"));
+			LOGGER.debug("movie = " + movieFinder.fineMovie("Games of Thrones"));
 
 			Movie movie = ctx.getBean("testMovie", Movie.class);
-			System.out.println("default Movie = " + movie.toString());
+			LOGGER.debug("default Movie = " + movie.toString());
 
 			Actress actress = ctx.getBean("actress", Actress.class);
-			System.out.println("actress = " + actress.toString());
+			LOGGER.debug("actress = " + actress.toString());
 			
 			DataSource dataSource = ctx.getBean("dataSource", DataSource.class);
-			System.out.println("DataSource = " + dataSource.toString());
+			LOGGER.debug("DataSource = " + dataSource.toString());
 
 		} catch(Exception e) {
-			e.printStackTrace();
-		} finally {
-			ctx.registerShutdownHook();
+			LOGGER.error(e);
 		}
 	}
 

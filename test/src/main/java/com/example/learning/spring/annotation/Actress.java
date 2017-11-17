@@ -3,11 +3,15 @@ package com.example.learning.spring.annotation;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
+import org.apache.log4j.Logger;
+
 public class Actress extends Cast {
+	
+	private static final Logger LOGGER = Logger.getLogger(Actress.class);
 
 	public Actress(String name) {
 		super(name);
-		System.out.println("Actress initialized::" + name);
+		LOGGER.debug("Actress initialized::" + name);
 	}
 
 	private int waist;
@@ -22,12 +26,12 @@ public class Actress extends Cast {
 	
 	@PostConstruct
 	public void afterConstruct() {
-		System.out.println("@PostConstruct ..." + this.getName());
+		LOGGER.debug("@PostConstruct ..." + this.getName());
 	}
 	
 	@PreDestroy
 	public void beforeDestroy() {
-		System.out.println("@PreDestroy ..." + this.getName());
+		LOGGER.debug("@PreDestroy ..." + this.getName());
 	}
 
 }

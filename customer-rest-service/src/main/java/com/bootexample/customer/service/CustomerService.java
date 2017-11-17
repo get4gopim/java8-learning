@@ -35,6 +35,8 @@ public class CustomerService {
 			}
 		}
 		
+		Customer custo = new Customer();
+		
 		return customer;
 	}
 }

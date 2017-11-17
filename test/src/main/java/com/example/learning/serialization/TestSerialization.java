@@ -9,10 +9,13 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 public class TestSerialization {
 
+	private static final Logger LOGGER = Logger.getLogger(TestSerialization.class);
+	
 	public static void main(String[] args) {
-		/*Magazine magazine = new Magazine("The Hindu", "Sun Rise On East", 489);
 		
 		Author auth = new Author();
 		auth.setAuthorName("Henry Ford");
@@ -24,34 +27,29 @@ public class TestSerialization {
 		auth.setIssueName("Malai Malar");
 		auth.setTotalPages(852);
 
-		writeObject(auth);*/
+		writeObject(auth);
 
-		//Author auth = readObject();
 
-		//System.out.println(auth.toString());
-		
-		System.out.println(Magazine.magazineId);
+		LOGGER.debug(Magazine.MAGAZINE_ID);
 	}
 
 	private static void writeObject(Author obj) {
-		try {
-			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("magazine"));
+		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("magazine"))) {
 			oos.writeObject(obj);
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			LOGGER.error(e);
 		} catch (IOException e) {
-			e.printStackTrace();
+			LOGGER.error(e.toString(), e);
 		}
 	}
 
 	private static Author readObject() {
-		try {
-			ObjectInputStream oos = new ObjectInputStream(new FileInputStream("magazine"));
+		try (ObjectInputStream oos = new ObjectInputStream(new FileInputStream("magazine"))) {
 			return (Author) oos.readObject();
 		} catch (FileNotFoundException | ClassNotFoundException e) {
-			e.printStackTrace();
+			LOGGER.error(e);
 		} catch (IOException e) {
-			e.printStackTrace();
+			LOGGER.error(e.toString(), e);
 		}
 		return null;
 	}	

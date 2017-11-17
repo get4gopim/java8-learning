@@ -12,7 +12,6 @@ public class SpringTestMain {
 		@SuppressWarnings("resource")
 		ApplicationContext ctx = new AnnotationConfigApplicationContext(MainConfiguration.class);
 		
-		//EmployeeService empService = (EmployeeService) ctx.getBean("empService");
 		
 		EmployeeService empService = ctx.getBean("employeeService", EmployeeService.class);
 		Employee emp = empService.findEmployeeByName("Jaime Lannister");

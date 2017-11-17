@@ -3,6 +3,10 @@ package com.example.interview.threadlocal;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class SessionContext {
+	
+	private SessionContext() {
+		
+	}
 
 	// Atomic integer containing the next thread ID to be assigned
     private static final AtomicInteger nextId = new AtomicInteger(0);

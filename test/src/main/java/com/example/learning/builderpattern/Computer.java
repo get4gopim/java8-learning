@@ -2,35 +2,35 @@ package com.example.learning.builderpattern;
 
 public class Computer {
 
-	private int RAM;
-	private int HDD;
-	private String OS;
+	private int ram;
+	private int hdd;
+	private String os;
 
 	private boolean isGraphicsCardEnabled;
 	private boolean isBluetoothEnabled;
 
 	public int getRAM() {
-		return RAM;
+		return ram;
 	}
 
 	public void setRAM(int rAM) {
-		RAM = rAM;
+		ram = rAM;
 	}
 
 	public int getHDD() {
-		return HDD;
+		return hdd;
 	}
 
 	public void setHDD(int hDD) {
-		HDD = hDD;
+		hdd = hDD;
 	}
 
 	public String getOS() {
-		return OS;
+		return os;
 	}
 
 	public void setOS(String oS) {
-		OS = oS;
+		os = oS;
 	}
 
 	public boolean isGraphicsCardEnabled() {
@@ -44,9 +44,9 @@ public class Computer {
 
 
 	public Computer(ComputerBuilder builder) {
-		this.HDD = builder.HDD;
-		this.RAM = builder.RAM;
-		this.OS = builder.OS;
+		this.hdd = builder.hdd;
+		this.ram = builder.ram;
+		this.os = builder.os;
 		
 		this.isGraphicsCardEnabled=builder.isGraphicsCardEnabled;
 		this.isBluetoothEnabled=builder.isBluetoothEnabled;
@@ -56,42 +56,42 @@ public class Computer {
 
 	@Override
 	public String toString() {
-		return "Computer [RAM=" + RAM + ", HDD=" + HDD + ", OS=" + OS + ", isGraphicsCardEnabled="
+		return "Computer [RAM=" + ram + ", HDD=" + hdd + ", OS=" + os + ", isGraphicsCardEnabled="
 				+ isGraphicsCardEnabled + ", isBluetoothEnabled=" + isBluetoothEnabled + "]";
 	}
 
 
 
 	static class ComputerBuilder {
-		private int RAM;
-		private int HDD;
-		private String OS;
+		private int ram;
+		private int hdd;
+		private String os;
 
 		private boolean isGraphicsCardEnabled;
 		private boolean isBluetoothEnabled;
 
 		public int getRAM() {
-			return RAM;
+			return ram;
 		}
 
 		public void setRAM(int rAM) {
-			RAM = rAM;
+			ram = rAM;
 		}
 
 		public int getHDD() {
-			return HDD;
+			return hdd;
 		}
 
 		public void setHDD(int hDD) {
-			HDD = hDD;
+			hdd = hDD;
 		}
 
 		public String getOS() {
-			return OS;
+			return os;
 		}
 
 		public void setOS(String oS) {
-			OS = oS;
+			os = oS;
 		}
 
 		public boolean isGraphicsCardEnabled() {
@@ -117,8 +117,8 @@ public class Computer {
 		}
 		
 		public ComputerBuilder(int hdd, int ram){
-			this.HDD=hdd;
-			this.RAM=ram;
+			this.hdd=hdd;
+			this.ram=ram;
 		}
 	}
 

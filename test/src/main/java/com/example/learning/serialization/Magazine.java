@@ -9,7 +9,7 @@ public class Magazine implements Serializable {
 	 */
 	private static final long serialVersionUID = 7617705073675686804L;
 	
-	public static int magazineId = 2002;
+	public static final int MAGAZINE_ID = 2002;
 	
 	private String publisherName;
 	private String issueName;

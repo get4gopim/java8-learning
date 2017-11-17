@@ -5,9 +5,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
+
 import com.example.learning.hibernate.util.HibernateUtil;
 
 public class DemoMain {
+	
+	private static final Logger LOGGER = Logger.getLogger(DemoMain.class);
 
 	public static void main(String[] args) {
 		try {
@@ -40,18 +44,18 @@ public class DemoMain {
 
 			Collection<Student> list = util.list(Student.class);
 			for (Student entity : list) {
-				System.out.println(entity.toString());
+				LOGGER.debug(entity.toString());
 			}
 			
-			System.out.println("filterd results ....");
+			LOGGER.debug("filterd results ....");
 			List<Student> students = util.getStudentByUniversityName("SSBV GJCS");
 			for (Student entity : students) {
-				System.out.println(entity.toString());
+				LOGGER.debug(entity.toString());
 			}
 			
 			util.close();
 		} catch (Exception ex) {
-			ex.printStackTrace();
+			LOGGER.error(ex);
 		}
 
 	}

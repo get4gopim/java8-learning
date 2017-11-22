@@ -1,10 +1,12 @@
 package com.example.learning.memleak;
 
-import java.util.Map;
-import java.util.HashMap;
 import java.lang.reflect.Proxy;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.log4j.Logger;
 
 /**
  * PermGenRemovalValidator
@@ -13,6 +15,8 @@ import java.net.URLClassLoader;
  * 
  */
 public class ClassMetadataLeakSimulator {
+	
+	private static final Logger LOGGER = Logger.getLogger(ClassMetadataLeakSimulator.class);
 
 	private static Map<String, ClassA> classLeakingMap = new HashMap<String, ClassA>();
 	private final static int NB_ITERATIONS_DEFAULT = 50000;
@@ -22,9 +26,9 @@ public class ClassMetadataLeakSimulator {
 	 */
 	public static void main(String[] args) {
 
-		System.out.println("Class metadata leak simulator");
-		System.out.println("Author: Pierre-Hugues Charbonneau");
-		System.out.println("http://javaeesupportpatterns.blogspot.com");
+		LOGGER.debug("Class metadata leak simulator");
+		LOGGER.debug("Author: Pierre-Hugues Charbonneau");
+		LOGGER.debug("http://javaeesupportpatterns.blogspot.com");
 
 		int nbIterations = (args != null && args.length == 1) ? Integer.parseInt(args[0]) : NB_ITERATIONS_DEFAULT;
 
@@ -34,7 +38,7 @@ public class ClassMetadataLeakSimulator {
 
 				String fictiousClassloaderJAR = "file:" + i + ".jar";
 
-				System.out.println(fictiousClassloaderJAR);
+				LOGGER.debug(fictiousClassloaderJAR);
 				URL[] fictiousClassloaderURL = new URL[] { new URL(fictiousClassloaderJAR) };
 
 				// Create a new classloader instance
@@ -50,9 +54,9 @@ public class ClassMetadataLeakSimulator {
 			}
 		} 
 		catch (Throwable any) {
-			System.out.println("ERROR: " + any);
+			LOGGER.debug("ERROR: " + any);
 		}
 
-		System.out.println("Done!");
+		LOGGER.debug("Done!");
 	}
 }

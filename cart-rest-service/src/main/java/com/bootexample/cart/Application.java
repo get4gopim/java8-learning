@@ -10,7 +10,7 @@ public class Application {
 	private static final Logger LOGGER = Logger.getLogger(Application.class);
 
 	public static void main(String[] args) {
-		LOGGER.info("Cart Rest Service Started ... ");
+		LOGGER.debug("Cart Rest Service Started ... ");
 		SpringApplication.run(Application.class, args);
 	}
 

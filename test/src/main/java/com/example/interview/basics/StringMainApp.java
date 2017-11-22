@@ -1,6 +1,6 @@
 package com.example.interview.basics;
 
-public class App1 {
+public class StringMainApp {
 
 	public static void main(String[] args) {
 		MyClass1 call = new MyClass1();

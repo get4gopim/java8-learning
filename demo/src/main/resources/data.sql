@@ -1,0 +1,1 @@
+INSERT INTO t_student (id, name) VALUES (1, 'AAA'), (2, 'BBB'), (3, 'CCC');

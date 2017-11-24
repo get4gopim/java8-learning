@@ -19,6 +19,8 @@ public class HibernateUtil {
 	
 	private static final Logger LOGGER = Logger.getLogger(HibernateUtil.class);
 	
+	private static final String QUERY_GET_STUDENT_BY_NAME = "getStudentByName";
+	
 	private final String filePath;
 	
 	private static SessionFactory sessionFactory;
@@ -38,6 +40,8 @@ public class HibernateUtil {
 			configuration.addAnnotatedClass(Department.class);
 			configuration.addAnnotatedClass(Student.class);
 			configuration.addAnnotatedClass(University.class);
+			
+			configuration.addResource("annotation/NamedQueries.hbm.xml");
 			
 			serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
 		            configuration.getProperties()).build();
@@ -110,6 +114,20 @@ public class HibernateUtil {
 		List<Student> students = null;
 		try {
 			students = session.createQuery("from Student where university.name =:university" ).setParameter("university", universityName).list();
+		} catch (Exception ex) {
+			LOGGER.error(ex);
+		} finally {
+			session.close();
+		}
+		return students;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Student> getStudentByName(final String stuName) {
+		Session session = getSessionFactory().openSession();
+		List<Student> students = null;
+		try {
+			students = session.getNamedQuery(QUERY_GET_STUDENT_BY_NAME).setParameter("NAME", stuName).list();
 		} catch (Exception ex) {
 			LOGGER.error(ex);
 		} finally {

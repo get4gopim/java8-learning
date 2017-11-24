@@ -53,9 +53,18 @@ public class DemoMain {
 				LOGGER.debug(entity.toString());
 			}
 			
+			LOGGER.debug("getStudentByName ....");
+			students = util.getStudentByName("Lakshana");
+			for (Student entity : students) {
+				LOGGER.debug(entity.toString());
+			}
+			
 			util.close();
 		} catch (Exception ex) {
 			LOGGER.error(ex);
+		} finally {
+			
+			HibernateUtil.getSessionFactory().close();
 		}
 
 	}

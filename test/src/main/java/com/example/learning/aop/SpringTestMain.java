@@ -12,11 +12,12 @@ public class SpringTestMain {
 		@SuppressWarnings("resource")
 		ApplicationContext ctx = new AnnotationConfigApplicationContext(MainConfiguration.class);
 		
+		LoginController loginController = ctx.getBean("loginController", LoginController.class);
+		loginController.login("admin", "passw0rd!");
 		
-		EmployeeService empService = ctx.getBean("employeeService", EmployeeService.class);
-		Employee emp = empService.findEmployeeByName("Jaime Lannister");
 		
-		LOGGER.debug(emp);
+		ReportController reportController = ctx.getBean("reportController", ReportController.class);
+		reportController.getPendingReports("mahi");
 	}
 
 }

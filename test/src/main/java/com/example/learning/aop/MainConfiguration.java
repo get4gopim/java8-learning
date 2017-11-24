@@ -10,13 +10,23 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @ComponentScan(basePackages= {"com.example.learning.aop"})
 public class MainConfiguration {
 
-	@Bean(name="empService")
+	/*@Bean(name="empService")
 	public EmployeeService getEmployeeService() {
 		return new EmployeeServiceImpl();
-	}
+	}*/
 	
 	@Bean // the Aspect itself must also be a Bean
     public LoggingAspect getAspect() {
         return new LoggingAspect();
+    }
+	
+	@Bean // the Aspect itself must also be a Bean
+    public InstantiationTracingBeanPostProcessor tracingBeanPostProcessor() {
+        return new InstantiationTracingBeanPostProcessor();
+    }
+	
+	@Bean
+    public static CustomBeanFactory customBeanFactory() {
+        return new CustomBeanFactory();
     }
 }

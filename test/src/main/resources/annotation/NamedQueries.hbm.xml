@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-mapping>
+
+	<query name="getStudentByName" cacheable="true" cache-mode="normal">
+        <![CDATA[from com.example.learning.hib.annotation.Student where name =:NAME]]>
+	</query>
+
+</hibernate-mapping>

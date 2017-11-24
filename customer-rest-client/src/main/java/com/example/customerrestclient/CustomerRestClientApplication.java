@@ -23,7 +23,7 @@ public class CustomerRestClientApplication implements CommandLineRunner {
 	
 	@Autowired
 	private DiscoveryClient discoveryClient;
-
+	
 	public static void main(String[] args) {
 		SpringApplication.run(CustomerRestClientApplication.class, args);
 	}
@@ -34,14 +34,23 @@ public class CustomerRestClientApplication implements CommandLineRunner {
 		
 		return instanceInfo.getUri().toString() + "/customer?id={id}";
 	}
+	
+	private String getURLFromZuul() {
+		List<ServiceInstance> list = discoveryClient.getInstances("customer-zuul-service");
+		ServiceInstance instanceInfo = list.get(0);
+		
+		return instanceInfo.getUri().toString() + "/customer-rest-service/customer?id={id}";
+	}
 
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println(getURL());
+		String url = getURLFromZuul();
 		
-		restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor("username", "pwd"));
+		System.out.println(url);
 		
-		Customer customer = restTemplate.getForObject(getURL(), Customer.class, 5);
+		//restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor("username", "pwd"));
+		
+		Customer customer = restTemplate.getForObject(url, Customer.class, 5);
 		
 		System.out.println(customer.toString());
 	}

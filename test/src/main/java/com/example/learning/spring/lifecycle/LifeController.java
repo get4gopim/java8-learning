@@ -6,7 +6,7 @@ public class LifeController {
 
 	public LifeController(LifeCycleService service) {
 		this.service = service;
-		System.out.println("LifeController Instantiation ...");
+		System.out.println("LifeController Instantiation && Setter Injection ...");
 	}
 	
 	public String greetings() {

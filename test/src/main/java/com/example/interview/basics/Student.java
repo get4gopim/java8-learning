@@ -1,10 +1,17 @@
 package com.example.interview.basics;
 
-public class Student implements Cloneable {
+public class Student implements Cloneable, Comparable<Student> {
 
 	int id;
 	String name;
 	Course course;
+	int age;
+	
+	public Student(int id, String name, int age) {
+		this.id = id;
+		this.name = name;
+		this.age = age;
+	}
 
 	public Student(int id, String name, Course course) {
 		super();
@@ -43,8 +50,25 @@ public class Student implements Cloneable {
 		this.course = course;
 	}
 
+
+
+	@Override
+	public int compareTo(Student o) {
+		int flag = this.getAge() - o.getAge();
+		if (flag == 0) flag = this.getName().compareTo(o.getName());
+		return flag;
+	}
+
 	@Override
 	public String toString() {
-		return "Student [id=" + id + ", name=" + name + ", course=" + course + "]";
+		return "Student [id=" + id + ", name=" + name + ", age=" + age + ", course=" + course + "]";
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
 	}
 }

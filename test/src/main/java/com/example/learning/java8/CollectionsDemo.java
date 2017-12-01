@@ -3,6 +3,7 @@ package com.example.learning.java8;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Spliterator;
 
 import org.apache.log4j.Logger;
 
@@ -19,6 +20,17 @@ public class CollectionsDemo {
 		names.add("Nerd Stark");
 		names.add("Catalyn Stark");
 		
+		Spliterator<String> split = names.spliterator();
+		System.out.println("est. size=" + split.estimateSize() + "; chara=" + split.characteristics());
+		Spliterator<String> split1 = split.trySplit();
+		System.out.println("est. size=" + split1.estimateSize() + "; chara=" + split1.characteristics());
+		
+		System.out.println("****** Initial split ******");
+		split.forEachRemaining(System.out::println);
+		
+		System.out.println("****** Remaining split ******");
+		split1.forEachRemaining(System.out::println);
+		
 		LOGGER.debug("Before: " + names);
 		
 		Collections.sort(names, (s1, s2) -> s1.compareTo(s2));
@@ -32,4 +44,12 @@ public class CollectionsDemo {
 		LOGGER.debug(x + ", ");
 	}
 
+}
+
+interface Service {
+	
+	default void add() {
+		System.out.println("add");
+	}
+	
 }

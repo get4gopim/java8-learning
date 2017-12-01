@@ -1,11 +1,32 @@
 package com.example.interview.basics;
 
+import java.util.function.Function;
+
 public class StringMainApp {
 
 	public static void main(String[] args) {
 		MyClass1 call = new MyClass1();
 		call.test();
+		
+		Object obj = null;
+		method(null);
+		method(obj);
 	}
+	
+	public static void method(Object obj) {
+		Function<Integer, Integer> squareRoot = x -> x * x;
+		
+		System.out.println("OBJ :: " + squareRoot.apply(5));
+		
+	}
+	
+	public static void method(String obj) {
+		System.out.println("STR");
+	}
+	
+	/*public static void method(MyClass1 obj) {
+		System.out.println("MyClass1");
+	}*/
 	
 }
 

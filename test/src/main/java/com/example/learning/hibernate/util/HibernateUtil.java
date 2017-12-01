@@ -135,4 +135,19 @@ public class HibernateUtil {
 		}
 		return students;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public void deleteStudent(final Student student) {
+		Session session = getSessionFactory().openSession();
+		Transaction tx = session.beginTransaction();
+		try {
+			session.delete(student);
+			tx.commit();
+		} catch (Exception ex) {
+			LOGGER.error(ex);
+			tx.rollback();
+		} finally {
+			session.close();
+		}
+	}
 }

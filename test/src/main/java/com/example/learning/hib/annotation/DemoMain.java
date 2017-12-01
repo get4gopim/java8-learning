@@ -18,6 +18,7 @@ public class DemoMain {
 			HibernateUtil util = new HibernateUtil("annotation/hibernate.cfg.xml");
 
 			Department d1 = new Department("UKG-B");
+			Department d2 = new Department("UKG-A");
 			
 			University univ = new University("SSBV GJCS", "India");
 			University univ2 = new University("MKV", "US");
@@ -34,13 +35,14 @@ public class DemoMain {
 			listStudents.add(stu2);
 			
 			Student stu3 = new Student("Guru Prasad");
-			stu3.setDepartment(d1);
+			stu3.setDepartment(d2);
 			stu3.setUniversity(univ2);
 			listStudents.add(stu3);
 			
 			d1.setStudents(listStudents);
 			
 			util.update(d1);
+			util.update(d2);
 
 			Collection<Student> list = util.list(Student.class);
 			for (Student entity : list) {
@@ -56,8 +58,13 @@ public class DemoMain {
 			LOGGER.debug("getStudentByName ....");
 			students = util.getStudentByName("Lakshana");
 			for (Student entity : students) {
-				LOGGER.debug(entity.toString());
+				LOGGER.debug("DELETEING ... " + entity.getName());
+				util.deleteStudent(entity);
 			}
+			
+			LOGGER.debug(" ********** final List ....");
+			list = util.list(Student.class);
+			list.forEach(stu -> System.out.println(stu.toString()));
 			
 			util.close();
 		} catch (Exception ex) {

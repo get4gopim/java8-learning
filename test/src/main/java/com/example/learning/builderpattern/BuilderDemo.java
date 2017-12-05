@@ -9,6 +9,9 @@ public class BuilderDemo {
 	public static void main(String[] args) {
 		Computer comp = new Computer.ComputerBuilder(128, 2).setBluetoothEnabled(true).build();
 		LOGGER.debug(comp);
+		
+		Camera camera = new Camera.Builder(200, 2.8f).setIso(100).build();
+		LOGGER.debug(camera);
 	}
 
 }

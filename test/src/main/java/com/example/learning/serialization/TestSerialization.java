@@ -23,14 +23,18 @@ public class TestSerialization {
 		history.add("12/02/2002");
 		history.add("05/11/2007");
 		auth.setHistory(history);
+		auth.setPublisherName("Vikatan Publish");
+		//auth.setTitle("Thirai Bimbamnagl");
 		
 		auth.setIssueName("Malai Malar");
 		auth.setTotalPages(852);
 
-		writeObject(auth);
+		LOGGER.debug(auth.toString());
+		
+		//writeObject(auth);
+		auth = readObject();
 
-
-		LOGGER.debug(Magazine.MAGAZINE_ID);
+		LOGGER.debug(auth.toString());
 	}
 
 	private static void writeObject(Author obj) {

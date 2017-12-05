@@ -11,6 +11,15 @@ public class Author extends Magazine  {
 	
 	private String authorName;
 	private List<String> history;
+	//private String title;
+	
+	
+	/*public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}*/
 	
 	public String getAuthorName() {
 		return authorName;
@@ -27,6 +36,7 @@ public class Author extends Magazine  {
 	
 	@Override
 	public String toString() {
+		//return super.toString() + "; Author [authorName=" + authorName + ", history=" + history + ", title="+ title + "]";
 		return super.toString() + "; Author [authorName=" + authorName + ", history=" + history + "]";
 	}
 	

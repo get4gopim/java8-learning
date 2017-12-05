@@ -15,7 +15,7 @@ public class LoggingAspect {
 
 	@Before("execution(* com.example.learning.aop.EmployeeServiceImpl.findEmployeeByName(..))")
 	public void logBefore(JoinPoint joinPoint) {
-		LOGGER.info("logBefore...");
+		LOGGER.info("logBefore..." + joinPoint.getTarget());
 	}
 	
 	@After("execution(* com.example.learning.aop.EmployeeServiceImpl.findEmployeeByName(..))")

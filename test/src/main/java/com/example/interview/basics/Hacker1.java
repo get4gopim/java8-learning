@@ -290,7 +290,7 @@ public class Hacker1 {
 			String dt = dateStr.substring(0, dateStr.length()-2);
 			dt = String.format("%02d", Integer.parseInt(dt));
 			
-			Month mm = Month.valueOf(mon);
+			DateMonth mm = DateMonth.valueOf(mon);
 			
 			list.add(year + "-" + mm.getMon() + "-" + dt);
 		}
@@ -335,12 +335,12 @@ public class Hacker1 {
 
 }
 
-enum Month {
+enum DateMonth {
 	Jan("01"), Feb("02"), Mar("03"),  Oct("10");
 	
 	private String mon;
 	
-	private Month(String m) {
+	private DateMonth(String m) {
 		this.mon = m;
 	}
 

@@ -1,10 +1,13 @@
 package com.example.learning.java8;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
 
@@ -26,8 +29,10 @@ public class MathOperationDemo {
 		//list.forEach(emp -> System.out.println(emp.toString()));
 		list.forEach(System.out::println);
 		
+		int[] a = new int[5];
 		
-		
+		List<Integer> myList = Arrays.stream(a).boxed().collect(Collectors.toList());
+
 		System.out.println("********** FILTERED ********");
 		list.stream().filter(emp -> emp.getEmpId() != 6192302).forEach(System.out::println);
 		
@@ -76,19 +81,26 @@ public class MathOperationDemo {
 		};
 
 		Thread t1 = new Thread(runnable);
+		t1.start();
+		
+		
 
 		System.out.println(invert.apply(48));
+		
 	}
 
 	static Function<Integer, Integer> invert = x -> -x;
 
 	interface MathOperation {
 		int operation(int a, int b);
+		
 	}
 
 	private int operate(int a, int b, MathOperation mathOperation) {
 		return mathOperation.operation(a, b);
 	}
+	
+	
 }
 
 class Employee {

@@ -12,7 +12,7 @@ public class CountDownLatchDemo {
 		final CountDownLatch latch = new CountDownLatch(3);
 		Thread cacheService = new Thread(new Service("CacheService", 1000, latch));
 		Thread alertService = new Thread(new Service("AlertService", 1000, latch));
-		Thread validationService = new Thread(new Service("ValidationService", 1000, latch));
+		Thread validationService = new Thread(new Service("ValidationService", 5000, latch));
 
 		cacheService.start(); // separate thread will initialize CacheService
 		alertService.start(); // another thread for AlertService initialization

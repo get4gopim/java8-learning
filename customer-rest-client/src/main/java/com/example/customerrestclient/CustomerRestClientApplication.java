@@ -8,7 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
-import org.springframework.http.client.support.BasicAuthorizationInterceptor;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.web.client.RestTemplate;
 
 import com.bootexample.customer.model.Customer;
@@ -22,22 +22,24 @@ public class CustomerRestClientApplication implements CommandLineRunner {
 	private RestTemplate restTemplate;
 	
 	@Autowired
-	private DiscoveryClient discoveryClient;
+	private LoadBalancerClient discoveryClient;
+	
+	@Autowired
+	private DiscoveryClient discoveryClient1;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(CustomerRestClientApplication.class, args);
 	}
 	
-	private String getURL() {
-		List<ServiceInstance> list = discoveryClient.getInstances("customer-rest-service");
+	private String getURLFromEurka() {
+		List<ServiceInstance> list = discoveryClient1.getInstances("customer-rest-service");
 		ServiceInstance instanceInfo = list.get(0);
 		
 		return instanceInfo.getUri().toString() + "/customer?id={id}";
 	}
 	
 	private String getURLFromZuul() {
-		List<ServiceInstance> list = discoveryClient.getInstances("customer-zuul-service");
-		ServiceInstance instanceInfo = list.get(0);
+		ServiceInstance instanceInfo = discoveryClient.choose("customer-zuul-service");
 		
 		return instanceInfo.getUri().toString() + "/customer-rest-service/customer?id={id}";
 	}

@@ -15,6 +15,8 @@ public class StringMainApp {
 		method(null);
 		method(obj);
 		
+		
+		
 		String key = "KING";
 		System.out.println("KING = " + key.hashCode() );
 		

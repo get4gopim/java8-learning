@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Spliterator;
+import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
 
@@ -20,6 +21,11 @@ public class CollectionsDemo {
 		names.add("Nerd Stark");
 		names.add("Catalyn Stark");
 		
+		names.stream().map(s -> s.length()).filter(len -> len > 10).collect(Collectors.toList()).forEach(System.out::println);
+		int res = names.stream().map(s -> s.length()).reduce(0, (a,b) -> a+b).intValue();
+		System.out.println(res);
+		
+	 	
 		Spliterator<String> split = names.spliterator();
 		System.out.println("est. size=" + split.estimateSize() + "; chara=" + split.characteristics());
 		Spliterator<String> split1 = split.trySplit();
